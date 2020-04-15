@@ -39,8 +39,14 @@ pipeline
         mkdir deploy
         cp -r frontend-${BUILD_NUMBER}.tar deploy/
         cd deploy
-        tar -xvf frontend-${BUILD_NUMBER}.tar deploy
+        tar -xvf frontend-${BUILD_NUMBER}.tar
+        rm -rf frontend-${BUILD_NUMBER}.tar
         ls -ltr
+        gsutil acl ch -u AllUsers:R gs://damodar-hegde
+        gsutil defacl set public-read gs://damodar-hegde
+        gsutil web set -m index.html -e index.html gs://damodar-hegde
+        gsutil cp -r * gs://damodar-hegde
+        gsutil setmeta -h "content-type: image/svg+xml" gs://damodar-hegde/static/media/*.svg
         '''
       }
     }
