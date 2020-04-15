@@ -24,6 +24,7 @@ pipeline
           cd build/
           ls -ltr
           tar -cvf frontend-${BUILD_NUMBER}.tar *
+          ls -ltr
           '''
         }
       }
